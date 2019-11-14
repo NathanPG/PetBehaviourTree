@@ -18,7 +18,7 @@ public class Log : MonoBehaviour
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
 
-        //scrollRect.verticalNormalizedPosition = 0;
+        scrollRect.verticalNormalizedPosition = 0;
     }
     private void Start()
     {
