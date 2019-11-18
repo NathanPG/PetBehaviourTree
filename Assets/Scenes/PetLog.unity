@@ -286,7 +286,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 971377457}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1331,8 +1331,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 604988776}
   m_HandleRect: {fileID: 604988775}
   m_Direction: 3
-  m_Value: 0.9999995
-  m_Size: 0.8230648
+  m_Value: 1
+  m_Size: 0.82306486
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1823,6 +1823,7 @@ GameObject:
   - component: {fileID: 2071195082}
   - component: {fileID: 2071195085}
   - component: {fileID: 2071195084}
+  - component: {fileID: 2071195086}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1870,6 +1871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1341c18acf272bb48913ced012b4f2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  log: {fileID: 0}
   hour_dis: {fileID: 1912958804}
   minute_dis: {fileID: 692151808}
   hunger: 0
@@ -1891,3 +1893,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dog: {fileID: 2071195084}
+--- !u!114 &2071195086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071195081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e43e7170fb45b4b81dcd16d0ff55d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 4900000, guid: 1d9a3db1b7af5364fb4bc4237fe96d20, type: 3}
+  autoReset: 1
+  tickOn: 0
+  sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 
+    btScript: 

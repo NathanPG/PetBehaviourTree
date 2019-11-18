@@ -6,6 +6,7 @@ using Panda;
 
 public class Manager : MonoBehaviour {
 
+    public Log log;
     private float minutes;
     private float hours;
     public Text hour_dis;
@@ -43,7 +44,7 @@ public class Manager : MonoBehaviour {
     [Task]
     bool IsHungry() {
         Debug.Log("Hunger: " + hunger);
-        return hunger > 60;
+        return hunger <= 60;
     }
 
     private void Start() {
@@ -56,6 +57,7 @@ public class Manager : MonoBehaviour {
         dish = 100;
         hour_dis.text = hours.ToString("00") + " :";
         minute_dis.text = minutes.ToString("00");
+        log = this.gameObject.GetComponent<Log>();
     }
 
     void Update() {
