@@ -6,7 +6,8 @@ using Panda;
 
 public class Manager : MonoBehaviour {
 
-    private float timer;
+    private float minutes;
+    private float hours;
 
     public float hunger;
     public float stamina;
@@ -44,13 +45,35 @@ public class Manager : MonoBehaviour {
     }
 
     private void Start() {
-        timer = 0;
+        hours = 7;
+        minutes = 60;
+        hunger = 100;
+        sanity = 100;
+        contentment = 100;
+        bladder = 0;
+        dish = 100;
+
     }
 
     void Update() {
-        timer += Time.deltaTime;
-        hunger -= Time.deltaTime;
-        
+        //TIMER
+        minutes += Time.deltaTime;
+        if(minutes >= 60)
+        {
+            minutes = 0;
+            hours += 1;
+        }
+        if(hours >= 24)
+        {
+            hours = 0;
+        }
+
+        //The dog will be hungery after 6 hours
+        if(hunger >= 0f)
+        {
+            hunger -= Time.deltaTime * 0.278f;
+        }
+
     }
    
    
