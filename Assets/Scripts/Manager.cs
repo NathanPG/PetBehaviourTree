@@ -8,6 +8,8 @@ public class Manager : MonoBehaviour {
 
     private float minutes;
     private float hours;
+    public Text hour_dis;
+    public Text minute_dis;
 
     public float hunger;
     public float stamina;
@@ -45,27 +47,31 @@ public class Manager : MonoBehaviour {
     }
 
     private void Start() {
-        hours = 7;
-        minutes = 60;
+        hours = 23;
+        minutes = 0;
         hunger = 100;
         sanity = 100;
         contentment = 100;
         bladder = 0;
         dish = 100;
-
+        hour_dis.text = hours.ToString("00") + " :";
+        minute_dis.text = minutes.ToString("00");
     }
 
     void Update() {
         //TIMER
         minutes += Time.deltaTime;
-        if(minutes >= 60)
+        minute_dis.text = minutes.ToString("00");
+        if (minutes >= 59)
         {
             minutes = 0;
             hours += 1;
+            hour_dis.text = hours.ToString("00") + " :";
         }
         if(hours >= 24)
         {
             hours = 0;
+            hour_dis.text = hours.ToString("00") + " :";
         }
 
         //The dog will be hungery after 6 hours

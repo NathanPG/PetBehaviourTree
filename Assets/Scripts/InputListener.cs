@@ -6,11 +6,6 @@ public class InputListener : MonoBehaviour
 {
     public Manager dog;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        dog = GameObject.Find("Boggie").GetComponent<Manager>();
-    }
 
     // Update is called once per frame
     void Update()
