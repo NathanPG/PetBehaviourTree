@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Panda;
 
 public class Log : MonoBehaviour
 {
     public GameObject textPre;
     public ScrollRect scrollRect;
-    public void  AddTextToLog(string LogText)
+
+    [Task]
+    public bool AddTextToLog(string LogText)
     {
         if (textPre == null)
         {
-            return;
+            return false;
         }
         GameObject temp = Instantiate(textPre, scrollRect.content, false);
         temp.GetComponentInChildren<Text>().text = LogText;
@@ -19,6 +22,7 @@ public class Log : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
 
         scrollRect.verticalNormalizedPosition = 0;
+        return true;
     }
     private void Start()
     {

@@ -1,4 +1,63 @@
 tree("Root")
-	sequence
-		IsHungry
-		EatFood
+	repeat
+		sequence
+			fallback
+				sequence
+					LoadDish
+					AddTextToLog("Dish loaded! It smells good!")
+				sequence
+					TreatDog
+					mute tree("Treat")
+				sequence
+					Add15Mins
+					AddTextToLog("15 mins later")
+				sequence
+					Add1Hour
+					AddTextToLog("1 hour later")
+				sequence
+					StartNewDay
+					random
+						AddTextToLog("A New Day!")
+						AddTextToLog("7 o'clock!")
+
+			mute tree("Monitor")
+
+
+tree("Treat")
+	parallel
+		sequence
+			IsHungry
+			EatFood
+		sequence
+			not
+				IsHungry
+			AddTextToLog("Boggie does not want to eat")
+
+
+tree("Monitor")
+	parallel
+		sequence
+			IsTired
+			random
+				AddTextToLog("Boggie is tired......")
+				AddTextToLog("Boggie wants to sleep.....")
+		sequence
+			IsHungry
+			random
+				AddTextToLog("Boggie is hungry......")
+				AddTextToLog("Boggie wants to eat something.....")
+		sequence
+			IsLonely
+			random
+				AddTextToLog("Boggie feels lonely......")
+				AddTextToLog("Boggie wants to sleep.....")
+		sequence
+			WantToPlay
+			random
+				AddTextToLog("Boggie is bored......")
+				AddTextToLog("Boggie wants to play.....")
+		sequence
+			NeedToGoOut
+			random
+				AddTextToLog("Boggie doesnt want to stay at home......")
+				AddTextToLog("Boggie wants to go out.....")
