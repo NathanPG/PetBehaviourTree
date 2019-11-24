@@ -109,6 +109,21 @@ public class Manager : MonoBehaviour {
     [Task]
     bool Wakeup() {
         isSleeping = false;
+        log.AddTextToLog("Boggie slept enough and woke up.");
+        return true;
+    }
+
+    [Task]
+    bool HWakeup() {
+        isSleeping = false;
+        log.AddTextToLog("Boggie woke up, his stomach was bothering him.");
+        return true;
+    }
+
+    [Task]
+    bool LWakeup() {
+        isSleeping = false;
+        log.AddTextToLog("Boggie woke up in the night and moved on your bed, trying to find someone to play with");
         return true;
     }
 
