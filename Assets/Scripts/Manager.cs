@@ -21,10 +21,6 @@ public class Manager : MonoBehaviour {
     public float sanity;
     //is not lonely 
     public float accompany;
-    //Fetch
-    public float Fetch;
-    //Belly
-    public float Belly;
     /*
     public float contentment;
     public float bladder;
@@ -32,8 +28,9 @@ public class Manager : MonoBehaviour {
     public bool isSleeping;
     public bool ownerOut;
     public bool timepassed;
-    public bool dogAlone;
-    
+
+    public int Fetch_ThisHour;
+    public int Belly_ThisHour;
     public int HowMany15MinsToNewDay;
 
     public float dish;
@@ -67,6 +64,7 @@ public class Manager : MonoBehaviour {
         return ownerOut;
     }
 
+
     [Task]
     bool IsSleeping() {
         return isSleeping;
@@ -75,22 +73,22 @@ public class Manager : MonoBehaviour {
     [Task]
     bool IsTired()
     {
-        return stamina < 30;
+        return stamina < 40;
     }
     [Task]
     bool IsHungry()
     {
-        return hunger<30;
+        return hunger < 40;
     }
     [Task]
     bool IsLonely()
     {
-        return accompany<30;
+        return accompany < 40;
     }
     [Task]
     bool WantToPlay()
     {
-        return sanity<30;
+        return sanity < 40;
     }
     [Task]
     bool NeedToGoOut()
@@ -116,8 +114,28 @@ public class Manager : MonoBehaviour {
             dish = 0;
             log.AddTextToLog("Boggie ate all food in the dish");
         } else{
-            log.AddTextToLog("ERROR, THIS NODE SHOULD NOT BE REACHED");
+            log.AddTextToLog("Boggie looked at the empty dish and softly barked at you, looks like he's hungry...");
         }
+        return true;
+    }
+
+    [Task]
+    bool Sleep() {
+        isSleeping = true;
+        log.AddTextToLog("Boggie felt too tired an went to sleep.");
+        return true;
+    }
+
+    [Task]
+    bool LookForPet() {
+        log.AddTextToLog("Boggie is running around your feet, he must be missing you so much!");
+        log.AddTextToLog("Maybe");
+        return true;
+    }
+
+    [Task]
+    bool LookOutside() {
+        log.AddTextToLog("Boggie sits at the window and stear at the horizon, he must be willing to have a run out side.");
         return true;
     }
 
@@ -129,9 +147,6 @@ public class Manager : MonoBehaviour {
         sanity = 100;
         stamina = 100;
         accompany = 100;
-        Fetch = 60;
-        Belly = 60;
-        dogAlone = true;
         //contentment = 100;
         //bladder = 0;
         HowMany15MinsToNewDay = 96;
