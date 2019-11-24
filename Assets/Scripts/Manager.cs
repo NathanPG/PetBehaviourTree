@@ -107,6 +107,24 @@ public class Manager : MonoBehaviour {
     }
 
     [Task]
+    bool Wakeup() {
+        isSleeping = false;
+        return true;
+    }
+
+    [Task]
+    bool Snore() {
+        if(stamina > 90) {
+            log.AddTextToLog("Your dog had a good rest and woke up!");
+            isSleeping = false;
+            if (sanity > 70) sanity -= 20;
+        } else {
+            log.AddTextToLog("Your dog is still sleeping soundly.");
+        }
+        return true;
+    }
+
+    [Task]
     bool EatFood() {
         Debug.Log("Dish: " + dish + ", hunger: " + hunger);
         float amount = 100 - hunger;
@@ -119,7 +137,11 @@ public class Manager : MonoBehaviour {
             dish = 0;
             log.AddTextToLog("Boggie ate all food in the dish");
         } else{
-            log.AddTextToLog("Boggie looked at the empty dish and softly barked at you, looks like he's hungry...");
+            if (!ownerOut) {
+                log.AddTextToLog("Boggie looked at the empty dish and softly barked at you, looks like he's hungry...");
+            } else {
+                log.AddTextToLog("Normally at this time Boggie would be hungry... WAIT, did you fill the dish before coming out?");
+            }
         }
         return true;
     }
@@ -127,7 +149,9 @@ public class Manager : MonoBehaviour {
     [Task]
     bool Sleep() {
         isSleeping = true;
-        log.AddTextToLog("Boggie felt too tired an went to sleep.");
+        if (!ownerOut) {
+            log.AddTextToLog("Boggie felt too tired an went to sleep.");
+        }
         return true;
     }
 

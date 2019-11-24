@@ -26,10 +26,31 @@ tree("NightBehavior")
 
 
 tree("DayOut")
-	AddTextToLog("Not implemented")
+	fallback
+		while
+			IsHungry
+			EatFood
+		race
+			while
+				IsLonely
+				Sleep
+			while 
+				WantToPlay
+				Sleep
+			while
+				IsTired
+				Sleep
 
 tree("DaySleep")
-	AddTextToLog("Not implemented")
+	fallback
+		while
+			IsHungry
+			while
+				not 
+					IsTired
+				Wakeup
+		Snore
+			
 
 tree("DayNormal")
 	fallback
