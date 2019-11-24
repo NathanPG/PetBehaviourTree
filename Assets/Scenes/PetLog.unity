@@ -4655,10 +4655,12 @@ MonoBehaviour:
   accompany: 0
   Fetch: 0
   Belly: 0
+  dogAlone: 0
   isSleeping: 0
   ownerOut: 0
   timepassed: 0
-  dogAlone: 0
+  Fetch_ThisHour: 0
+  Belly_ThisHour: 0
   HowMany15MinsToNewDay: 0
   dish: 0
 --- !u!114 &2071195085

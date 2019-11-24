@@ -127,7 +127,10 @@ public class InputListener : MonoBehaviour
             dog.accompany -= 3;
             if (dog.accompany < 0) dog.accompany = 0;
         }
-
+        //Fetch
+        dog.Fetch -= 4;
+        //Belly
+        dog.Belly -= 4;
     }
 
     //H, Value changes four times faster than I
@@ -173,6 +176,10 @@ public class InputListener : MonoBehaviour
                 dog.accompany -= 12;
                 if (dog.accompany < 0) dog.accompany = 0;
             }
+        //Fetch
+        dog.Fetch -= 16;
+        //Belly
+        dog.Belly -= 16;
     }
 
     //D
@@ -239,6 +246,7 @@ public class InputListener : MonoBehaviour
             log.AddTextToLog("You miss your dog a lot! But you at work now.");
             return;
         }
+        dog.dogAlone = false;
         if (dog.hunger >= 75) {
             log.AddTextToLog("Boggie seems pretty full at this time...");
         }
@@ -266,6 +274,7 @@ public class InputListener : MonoBehaviour
             log.AddTextToLog("You miss your dog a lot! But you at work now.");
             return;
         }
+        dog.dogAlone = false;
         if (dog.Fetch <= 10)
         {
             dog.Fetch += 5;
@@ -308,6 +317,7 @@ public class InputListener : MonoBehaviour
             log.AddTextToLog("You miss your dog a lot! But you at work now.");
             return;
         }
+        dog.dogAlone = false;
         dog.accompany += 5;
         log.AddTextToLog("You are petting Boggie~");
     }
@@ -411,5 +421,4 @@ public class InputListener : MonoBehaviour
     {
 
     }
-
 }
