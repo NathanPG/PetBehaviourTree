@@ -76,56 +76,57 @@ public class InputListener : MonoBehaviour
     public void Add15Mins()
     {
         dog.timepassed = true;
-            if (dog.minutes == 45)
+        log.AddTextToLog("15 mins passed");
+        if (dog.minutes == 45)
+        {
+            if (dog.hours == 23)
             {
-                if (dog.hours == 23)
-                {
-                    dog.hours = 0;
-                    dog.HowMany15MinsToNewDay = 96;
-                }
-                else
-                {
-                    dog.hours += 1;
-                    dog.HowMany15MinsToNewDay -= 1;
-                }
-                dog.minutes = 0;
+                dog.hours = 0;
+                dog.HowMany15MinsToNewDay = 96;
             }
             else
             {
-                dog.minutes += 15;
+                dog.hours += 1;
                 dog.HowMany15MinsToNewDay -= 1;
+            }
+            dog.minutes = 0;
+        }
+        else
+        {
+            dog.minutes += 15;
+            dog.HowMany15MinsToNewDay -= 1;
 
-            }
-            dog.hour_dis.text = dog.hours.ToString("00") + " :";
-            dog.minute_dis.text = dog.minutes.ToString("00");
+        }
+        dog.hour_dis.text = dog.hours.ToString("00") + " :";
+        dog.minute_dis.text = dog.minutes.ToString("00");
 
-            //STAMINA
-            if (dog.isSleeping)
-            {
-                if(dog.stamina<=95) dog.stamina += 5;
-            }
-            else
-            {
-                dog.stamina -= 4;
-                if (dog.stamina < 0) dog.stamina = 0;
-            }
-            //HUNGER
-            dog.hunger -= 3;
-            if (dog.hunger < 0) dog.hunger = 0;
-            //SANITY
-            dog.sanity -= 4;
-            if (dog.sanity < 0) dog.sanity = 0;
-            //LONELINESS
-            if (dog.ownerOut)
-            {
-                dog.accompany -= 5;
-                if (dog.accompany < 0) dog.accompany = 0;
-            }
-            else
-            {
-                dog.accompany -= 3;
-                if (dog.accompany < 0) dog.accompany = 0;
-            }
+        //STAMINA
+        if (dog.isSleeping)
+        {
+            if (dog.stamina <= 95) dog.stamina += 5;
+        }
+        else
+        {
+            dog.stamina -= 4;
+            if (dog.stamina < 0) dog.stamina = 0;
+        }
+        //HUNGER
+        dog.hunger -= 3;
+        if (dog.hunger < 0) dog.hunger = 0;
+        //SANITY
+        dog.sanity -= 4;
+        if (dog.sanity < 0) dog.sanity = 0;
+        //LONELINESS
+        if (dog.ownerOut)
+        {
+            dog.accompany -= 5;
+            if (dog.accompany < 0) dog.accompany = 0;
+        }
+        else
+        {
+            dog.accompany -= 3;
+            if (dog.accompany < 0) dog.accompany = 0;
+        }
 
     }
 
@@ -133,6 +134,7 @@ public class InputListener : MonoBehaviour
     public void Add1Hour()
     {
         dog.timepassed = true;
+        log.AddTextToLog("1 hour passed!");
         if (dog.hours == 23)
             {
                 dog.hours = 0;
