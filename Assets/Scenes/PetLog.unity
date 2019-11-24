@@ -1077,8 +1077,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
-  m_SizeDelta: {x: 0, y: 379.8}
+  m_AnchoredPosition: {x: 0.000061033, y: -0.000030517578}
+  m_SizeDelta: {x: -0.000061035, y: 312.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &576869127
 MonoBehaviour:
@@ -1377,7 +1377,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1, y: 6e-45, z: 0, w: -1.618677e-23}
+  m_BoundingSphereOverride: {x: 0, y: 9.811855e-21, z: 5.1e-43, w: 6.4454236e-21}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2555,8 +2555,8 @@ MonoBehaviour:
   m_VerticalScrollbar: {fileID: 1736631152}
   m_HorizontalScrollbarVisibility: 2
   m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
-  m_VerticalScrollbarSpacing: -3
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3441,8 +3441,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 604988776}
   m_HandleRect: {fileID: 604988775}
   m_Direction: 3
-  m_Value: 0.9999995
-  m_Size: 0.8230648
+  m_Value: 1.0000101
+  m_Size: 0.99040306
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4644,7 +4644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1341c18acf272bb48913ced012b4f2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  log: {fileID: 0}
+  log: {fileID: 2071195082}
   minutes: 0
   hours: 0
   hour_dis: {fileID: 1912958804}
@@ -4652,8 +4652,13 @@ MonoBehaviour:
   hunger: 0
   stamina: 0
   sanity: 0
-  contentment: 0
-  bladder: 0
+  loneliness: 0
+  isSleeping: 0
+  ownerOut: 0
+  dogOut: 0
+  Fetch_ThisHour: 0
+  Belly_ThisHour: 0
+  HowMany15MinsToNewDay: 0
   dish: 0
 --- !u!114 &2071195085
 MonoBehaviour:
@@ -4668,7 +4673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dog: {fileID: 2071195084}
-  log: {fileID: 0}
+  log: {fileID: 2071195082}
 --- !u!114 &2071195086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4689,7 +4694,7 @@ MonoBehaviour:
   - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
-    collapsedLines: 
+    collapsedLines: 1a00000025000000
     btScript: 
 --- !u!1001 &2091487610
 PrefabInstance:

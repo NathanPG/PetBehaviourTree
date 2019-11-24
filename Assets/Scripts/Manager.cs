@@ -12,18 +12,39 @@ public class Manager : MonoBehaviour {
     public Text hour_dis;
     public Text minute_dis;
 
+    //ALL DECREASE 100 -> 0
+    //is hungry
     public float hunger;
+    //is sleepy
     public float stamina;
+    //wants to play
     public float sanity;
+    //is lonely 
+    public float loneliness;
+    /*
     public float contentment;
     public float bladder;
+    */
+    public bool isSleeping;
+    public bool ownerOut;
+    public bool dogOut;
+
+    public int Fetch_ThisHour;
+    public int Belly_ThisHour;
+    public int HowMany15MinsToNewDay;
 
     public float dish;
-
+    [Task]
+    bool DEBUG()
+    {
+        Debug.Log("HUNGER: " + hunger + ", STAMINA: " + stamina 
+            + ", SANITY: " + sanity + ", LONELINESS: " + loneliness);
+        return true;
+    }
     [Task]
     bool IsTired()
     {
-        return sanity<30;
+        return stamina < 30;
     }
     [Task]
     bool IsHungry()
@@ -33,12 +54,12 @@ public class Manager : MonoBehaviour {
     [Task]
     bool IsLonely()
     {
-        return true;
+        return loneliness<30;
     }
     [Task]
     bool WantToPlay()
     {
-        return true;
+        return sanity<30;
     }
     [Task]
     bool NeedToGoOut()
@@ -75,8 +96,11 @@ public class Manager : MonoBehaviour {
         minutes = 0;
         hunger = 100;
         sanity = 100;
-        contentment = 100;
-        bladder = 0;
+        stamina = 100;
+        loneliness = 100;
+        //contentment = 100;
+        //bladder = 0;
+        HowMany15MinsToNewDay = 96;
         dish = 100;
         hour_dis.text = hours.ToString("00") + " :";
         minute_dis.text = minutes.ToString("00");
@@ -84,28 +108,6 @@ public class Manager : MonoBehaviour {
     }
 
     void Update() {
-        /*
-        //TIMER
-        minutes += Time.deltaTime;
-        minute_dis.text = minutes.ToString("00");
-        if (minutes >= 59)
-        {
-            minutes = 0;
-            hours += 1;
-            hour_dis.text = hours.ToString("00") + " :";
-        }
-        if(hours >= 24)
-        {
-            hours = 0;
-            hour_dis.text = hours.ToString("00") + " :";
-        }
-        //The dog will be hungery after 6 hours
-        if(hunger >= 0f)
-        {
-            hunger -= Time.deltaTime * 0.278f;
-        }
-        */
-
     }
    
    

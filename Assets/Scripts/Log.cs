@@ -12,22 +12,17 @@ public class Log : MonoBehaviour
     [Task]
     public bool AddTextToLog(string LogText)
     {
-        if (textPre == null)
-        {
-            return false;
-        }
         GameObject temp = Instantiate(textPre, scrollRect.content, false);
         temp.GetComponentInChildren<Text>().text = LogText;
-
-        LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
-
-        scrollRect.verticalNormalizedPosition = 0;
+        //scrollRect.verticalNormalizedPosition = 0;
+        //LayoutRebuilder.MarkLayoutForRebuild(scrollRect.content);
+        //LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
         return true;
     }
+
     private void Start()
     {
         AddTextToLog("Game Starts!");
         AddTextToLog("Meet your new friend, Boggie!");
-        
     }
 }
