@@ -19,8 +19,8 @@ public class Manager : MonoBehaviour {
     public float stamina;
     //wants to play
     public float sanity;
-    //is lonely 
-    public float loneliness;
+    //is not lonely 
+    public float accompany;
     /*
     public float contentment;
     public float bladder;
@@ -38,9 +38,32 @@ public class Manager : MonoBehaviour {
     bool DEBUG()
     {
         Debug.Log("HUNGER: " + hunger + ", STAMINA: " + stamina 
-            + ", SANITY: " + sanity + ", LONELINESS: " + loneliness);
+            + ", SANITY: " + sanity + ", LONELINESS: " + accompany);
         return true;
     }
+    [Task]
+    bool IsDay() {
+        return 6 < hours && hours < 18;
+    }
+    [Task]
+    bool IsNight() {
+        return hours <= 6 || hours >= 18;
+    }
+    [Task]
+    bool OwnerIsOut() {
+        return ownerOut;
+    }
+
+    [Task]
+    bool DogIsOut() {
+        return dogOut;
+    }
+
+    [Task]
+    bool IsSleeping() {
+        return isSleeping;
+    }
+
     [Task]
     bool IsTired()
     {
@@ -54,7 +77,7 @@ public class Manager : MonoBehaviour {
     [Task]
     bool IsLonely()
     {
-        return loneliness<30;
+        return accompany<30;
     }
     [Task]
     bool WantToPlay()
@@ -97,7 +120,7 @@ public class Manager : MonoBehaviour {
         hunger = 100;
         sanity = 100;
         stamina = 100;
-        loneliness = 100;
+        accompany = 100;
         //contentment = 100;
         //bladder = 0;
         HowMany15MinsToNewDay = 96;

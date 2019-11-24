@@ -8,12 +8,66 @@ public class InputListener : MonoBehaviour
     public Manager dog;
     public Log log;
 
-    [Task]
+    // Start is called before the first frame update 
+    void Start() {
+        dog = GameObject.Find("GameController").GetComponent<Manager>();
+        log = GameObject.Find("GameController").GetComponent<Log>();
+    }
+
+    // Update is called once per frame 
+    void Update() {
+        string inputstring = Input.inputString;
+
+        // Look for a number key click 
+        if (inputstring.Length > 0) {
+            Debug.Log(inputstring);
+
+            if (inputstring[0] == 'f' || inputstring[0] == 'F') {
+                LoadDish();
+            }
+            if (inputstring[0] == 't' || inputstring[0] == 'T') {
+                Treat();
+            }
+            if (inputstring[0] == 'k' || inputstring[0] == 'K') {
+                Fetch();
+            }
+            if (inputstring[0] == 'p' || inputstring[0] == 'P') {
+                Pet();
+            }
+            if (inputstring[0] == 'b' || inputstring[0] == 'B') {
+                BellyRub();
+            }
+            if (inputstring[0] == 'w' || inputstring[0] == 'W') {
+                Walk();
+            }
+            if (inputstring[0] == 'l' || inputstring[0] == 'L') {
+                LeaveAlone();
+            }
+            if (inputstring[0] == 'g' || inputstring[0] == 'G') {
+                Work();
+            }
+            if (inputstring[0] == 'a' || inputstring[0] == 'A') {
+                Return();
+            }
+            if (inputstring[0] == 'i' || inputstring[0] == 'I') {
+                Add15Mins();
+            }
+            if (inputstring[0] == 'h' || inputstring[0] == 'H') {
+                Add1Hour();
+            }
+            if (inputstring[0] == 'd' || inputstring[0] == 'D') {
+                StartNewDay();
+            }
+            if (inputstring[0] == 's' || inputstring[0] == 'S') {
+                Noise();
+            }
+        }
+    }
+
     //I
-    public bool Add15Mins()
+    public void Add15Mins()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
+
             if (dog.minutes == 45)
             {
                 if (dog.hours == 23)
@@ -59,25 +113,20 @@ public class InputListener : MonoBehaviour
             //LONELINESS
             if (dog.ownerOut)
             {
-                dog.loneliness -= 5;
-                if (dog.loneliness < 0) dog.loneliness = 0;
+                dog.accompany -= 5;
+                if (dog.accompany < 0) dog.accompany = 0;
             }
             else
             {
-                dog.loneliness -= 3;
-                if (dog.loneliness < 0) dog.loneliness = 0;
+                dog.accompany -= 3;
+                if (dog.accompany < 0) dog.accompany = 0;
             }
-            return true;
-        }
-        return false;
+
     }
 
-    [Task]
     //H, Value changes four times faster than I
-    public bool Add1Hour()
+    public void Add1Hour()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
             if (dog.hours == 23)
             {
                 dog.hours = 0;
@@ -111,25 +160,19 @@ public class InputListener : MonoBehaviour
             //LONELINESS
             if (dog.ownerOut)
             {
-                dog.loneliness -= 20;
-                if (dog.loneliness < 0) dog.loneliness = 0;
+                dog.accompany -= 20;
+                if (dog.accompany < 0) dog.accompany = 0;
             }
             else
             {
-                dog.loneliness -= 12;
-                if (dog.loneliness < 0) dog.loneliness = 0;
+                dog.accompany -= 12;
+                if (dog.accompany < 0) dog.accompany = 0;
             }
-            return true;
-        }
-        return false;
     }
 
-    [Task]
     //D
-    public bool StartNewDay()
+    public void StartNewDay()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
             dog.minutes = 0;
             dog.hours = 7;
             dog.hour_dis.text = dog.hours.ToString("00") + " :";
@@ -156,146 +199,105 @@ public class InputListener : MonoBehaviour
             //LONELINESS
             if (dog.ownerOut)
             {
-                dog.loneliness -= 5 * dog.HowMany15MinsToNewDay;
-                if (dog.loneliness < 0) dog.loneliness = 0;
+                dog.accompany -= 5 * dog.HowMany15MinsToNewDay;
+                if (dog.accompany < 0) dog.accompany = 0;
             }
             else
             {
-                dog.loneliness -= 3 * dog.HowMany15MinsToNewDay;
-                if (dog.loneliness < 0) dog.loneliness = 0;
+                dog.accompany -= 3 * dog.HowMany15MinsToNewDay;
+                if (dog.accompany < 0) dog.accompany = 0;
             }
 
-
-            return true;
-        }
-        return false;
     }
 
-    [Task]
     //F
-    public bool LoadDish()
+    public void LoadDish()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
             if(dog.dish == 100)
             {
                 log.AddTextToLog("Dish already full!");
-                return false;
             }
             else
             {
                 dog.dish = 100;
-                return true;
             }  
-        }
-        return false;
     }
 
-    [Task]
+
     //T
-    public bool TreatDogInput()
+    public void Treat()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if(dog.dish > 0)
-            {
-                return true;
-            }
-            else
-            {
-                log.AddTextToLog("Oh, you forget to load the dish!");
-                return false;
-            }
+        if(dog.hunger >= 75) {
+            log.AddTextToLog("Boggie seems pretty full at this time...");
         }
-        return false;
+        else if(dog.hunger >= 30) {
+            log.AddTextToLog("Boggie looks happy with the treat!");
+            dog.hunger += 10;
+            dog.accompany = dog.accompany <= 50 ? dog.accompany + 10 : dog.accompany;
+        } else {
+            log.AddTextToLog("Boggie rushed towards you and devoured the treat...");
+            dog.hunger += 10;
+            log.AddTextToLog("Boggie is stearing at your hand, maybe he wants more?");
+        }
+
+
     }
 
-    [Task]
+
     //K
-    public bool FetchInput()
+    public void Fetch()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            return true;
-        }
-        return false;
+        
+
+
     }
 
-    [Task]
+
     //P
-    public bool PetDogInput()
+    public void Pet()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            return true;
-        }
-        return false;
+        
     }
 
-    [Task]
+
     //B
-    public bool BellyRubInput()
+    public void BellyRub()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            return true;
-        }
-        return false;
+        
     }
 
-    [Task]
+
     //W
-    public bool WalkInput()
+    public void Walk()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            return true;
-        }
-        return false;
+        
     }
 
-    [Task]
+
     //L
-    public bool LeaveAloneInput()
+    public void LeaveAlone()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            return true;
-        }
-        return false;
+        
     }
 
-    [Task]
+
     //G
-    public bool WorkInput()
+    public void Work()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            return true;
-        }
-        return false;
+        
     }
 
-    [Task]
     //A
-    public bool ReturnInput()
+    public void Return()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            return true;
-        }
-        return false;
+
     }
 
-    [Task]
+
     //S
-    public bool NoiseInput()
+    public void Noise()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            return true;
-        }
-        return false;
+
     }
 
 }

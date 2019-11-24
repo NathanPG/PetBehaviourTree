@@ -1,50 +1,33 @@
 tree("Root")
-	repeat
-		fallback
-			sequence
-				LoadDish
-				AddTextToLog("Dish loaded! It smells good!")
-			sequence
-				TreatDogInput
-				tree("Treat")
-			sequence
-				FetchInput
-				tree("Fetch")
-			sequence
-				PetDogInput
-				tree("Pet")
-			sequence
-				BellyRubInput
-				tree("Belly")
-			sequence
-				WalkInput
-				tree("Walk")
-			sequence
-				LeaveAloneInput
-				tree("LeaveAlone")
-			sequence
-				WorkInput
-				tree("Work")
-			sequence
-				ReturnInput
-				tree("Return")
-			sequence
-				Add15Mins
-				AddTextToLog("15 mins later")
-				DEBUG
-			sequence
-				Add1Hour
-				AddTextToLog("1 hour later")
-				DEBUG
-			sequence
-				StartNewDay
-				DEBUG
-				random
-					AddTextToLog("A New Day!")
-					AddTextToLog("7 o'clock!")
-			sequence
-				NoiseInput
-				tree("Noise")
+	fallback
+		while
+			IsDay
+			DayBehavior
+		while
+			IsNight
+			NightBehavior
+
+
+tree("DayBehavior")
+	fallback
+		while
+			OwnerIsOut
+			DayOut
+		while
+			DogIsOut
+			DayWalk
+		while
+			IsSleeping
+			DaySleep
+
+
+
+tree("DayOut")
+	
+
+
+tree("NightBehavior")
+
 
 tree("Treat")
 	parallel
@@ -55,29 +38,4 @@ tree("Treat")
 			not
 				IsHungry
 			AddTextToLog("Boggie does not want to eat")
-
-tree("Fetch")
-	AddTextToLog(".......................")
-
-tree("Pet")
-	AddTextToLog(".......................")
-
-tree("Belly")
-	AddTextToLog(".......................")
-
-tree("Walk")
-	AddTextToLog(".......................")
-
-tree("LeaveAlone")
-	AddTextToLog(".......................")
-
-tree("Work")
-	AddTextToLog(".......................")
-
-tree("Return")
-	AddTextToLog(".......................")
-
-tree("Noise")
-	AddTextToLog(".......................")
-
 
