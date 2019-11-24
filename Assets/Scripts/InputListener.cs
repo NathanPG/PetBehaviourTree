@@ -67,7 +67,7 @@ public class InputListener : MonoBehaviour
     //I
     public void Add15Mins()
     {
-
+        dog.timepassed = true;
             if (dog.minutes == 45)
             {
                 if (dog.hours == 23)
@@ -127,7 +127,8 @@ public class InputListener : MonoBehaviour
     //H, Value changes four times faster than I
     public void Add1Hour()
     {
-            if (dog.hours == 23)
+        dog.timepassed = true;
+        if (dog.hours == 23)
             {
                 dog.hours = 0;
                 dog.HowMany15MinsToNewDay = 96;
@@ -173,7 +174,8 @@ public class InputListener : MonoBehaviour
     //D
     public void StartNewDay()
     {
-            dog.minutes = 0;
+        dog.timepassed = true;
+        dog.minutes = 0;
             dog.hours = 7;
             dog.hour_dis.text = dog.hours.ToString("00") + " :";
             dog.minute_dis.text = dog.minutes.ToString("00");

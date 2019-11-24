@@ -186,7 +186,7 @@ MonoBehaviour:
   - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
-    collapsedLines: 05000000
+    collapsedLines: 050000001a00000025000000
     btScript: 
 --- !u!1001 &49757895
 PrefabInstance:
@@ -1389,7 +1389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 23.200012, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
-    collapsedLines: 
+    collapsedLines: 050000001a00000025000000
     btScript: 
 --- !u!1 &710982449
 GameObject:
@@ -1904,7 +1904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4041106081030852, guid: 0fcd3077ea816ff4d9388e7425919d2b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 23.200012
       objectReference: {fileID: 0}
     - target: {fileID: 4041106081030852, guid: 0fcd3077ea816ff4d9388e7425919d2b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1987,7 +1987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -384, y: 200}
+  m_AnchoredPosition: {x: -360.8, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &889018354
@@ -2306,7 +2306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 23.200012, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3721,7 +3721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -366.2, y: -10.825}
+  m_AnchoredPosition: {x: -343, y: -10.825}
   m_SizeDelta: {x: 203.1, y: 404.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1792227978
@@ -4644,7 +4644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1341c18acf272bb48913ced012b4f2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  log: {fileID: 2071195082}
+  log: {fileID: 0}
   minutes: 0
   hours: 0
   hour_dis: {fileID: 1912958804}
@@ -4652,10 +4652,11 @@ MonoBehaviour:
   hunger: 0
   stamina: 0
   sanity: 0
-  loneliness: 0
+  accompany: 0
   isSleeping: 0
   ownerOut: 0
   dogOut: 0
+  timepassed: 0
   Fetch_ThisHour: 0
   Belly_ThisHour: 0
   HowMany15MinsToNewDay: 0
@@ -4672,8 +4673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe2ecefdc9c50e4fa65c5fe2ef4ad7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dog: {fileID: 2071195084}
-  log: {fileID: 2071195082}
+  dog: {fileID: 0}
+  log: {fileID: 0}
 --- !u!114 &2071195086
 MonoBehaviour:
   m_ObjectHideFlags: 0

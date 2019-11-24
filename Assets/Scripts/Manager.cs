@@ -28,6 +28,7 @@ public class Manager : MonoBehaviour {
     public bool isSleeping;
     public bool ownerOut;
     public bool dogOut;
+    public bool timepassed;
 
     public int Fetch_ThisHour;
     public int Belly_ThisHour;
@@ -41,6 +42,16 @@ public class Manager : MonoBehaviour {
             + ", SANITY: " + sanity + ", LONELINESS: " + accompany);
         return true;
     }
+    [Task]
+    bool CheckTimePass() {
+        if (timepassed) {
+            timepassed = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     [Task]
     bool IsDay() {
         return 6 < hours && hours < 18;

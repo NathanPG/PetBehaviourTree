@@ -1,41 +1,38 @@
 tree("Root")
-	fallback
-		while
-			IsDay
-			DayBehavior
-		while
-			IsNight
-			NightBehavior
+	sequence
+		CheckTimePass
+		fallback
+			while
+				IsDay
+				tree("DayBehavior")
+			while
+				IsNight
+				tree("NightBehavior")
 
 
 tree("DayBehavior")
 	fallback
 		while
 			OwnerIsOut
-			DayOut
+			tree("DayOut")
 		while
 			DogIsOut
-			DayWalk
+			tree("DayWalk")
 		while
 			IsSleeping
-			DaySleep
+			tree("DaySleep")
 
 
 
 tree("DayOut")
-	
+	AddTextToLog("Not implemented")
 
+tree("DayWalk")
+	AddTextToLog("Not implemented")
 
 tree("NightBehavior")
+	AddTextToLog("Not implemented")
 
-
-tree("Treat")
-	parallel
-		sequence
-			IsHungry
-			EatFood
-		sequence
-			not
-				IsHungry
-			AddTextToLog("Boggie does not want to eat")
+tree("DaySleep")
+	AddTextToLog("Not implemented")
 
