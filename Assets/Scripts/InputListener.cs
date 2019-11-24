@@ -129,8 +129,10 @@ public class InputListener : MonoBehaviour
         }
         //Fetch
         dog.Fetch -= 4;
+        if (dog.Fetch < 0) dog.Fetch = 0;
         //Belly
         dog.Belly -= 4;
+        if (dog.Belly < 0) dog.Belly = 0;
     }
 
     //H, Value changes four times faster than I
@@ -178,8 +180,10 @@ public class InputListener : MonoBehaviour
             }
         //Fetch
         dog.Fetch -= 16;
+        if (dog.Fetch < 0) dog.Fetch = 0;
         //Belly
         dog.Belly -= 16;
+        if (dog.Belly < 0) dog.Belly = 0;
     }
 
     //D
@@ -217,7 +221,12 @@ public class InputListener : MonoBehaviour
                 dog.accompany -= 3 * dog.HowMany15MinsToNewDay;
                 if (dog.accompany < 0) dog.accompany = 0;
             }
-
+            //Fetch
+        dog.Fetch -= 384;
+        if (dog.Fetch < 0) dog.Fetch = 0;
+        //Belly
+        dog.Belly -= 384;
+        if (dog.Belly < 0) dog.Belly = 0;
     }
 
     //F
