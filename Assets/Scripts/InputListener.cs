@@ -14,7 +14,6 @@ public class InputListener : MonoBehaviour
         dog = GameObject.Find("GameController").GetComponent<Manager>();
         log = GameObject.Find("GameController").GetComponent<Log>();
         timer = 0f;
-
     }
 
     // Update is called once per frame 
@@ -114,11 +113,8 @@ public class InputListener : MonoBehaviour
             dog.hunger -= 3;
             if (dog.hunger < 0) dog.hunger = 0;
             //SANITY
-            if (!dog.dogOut)
-            {
-                dog.sanity -= 4;
-                if (dog.sanity < 0) dog.sanity = 0;
-            }
+            dog.sanity -= 4;
+            if (dog.sanity < 0) dog.sanity = 0;
             //LONELINESS
             if (dog.ownerOut)
             {
@@ -162,11 +158,8 @@ public class InputListener : MonoBehaviour
             dog.hunger -= 12;
             if (dog.hunger < 0) dog.hunger = 0;
             //SANITY
-            if (!dog.dogOut)
-            {
-                dog.sanity -= 16;
-                if (dog.sanity < 0) dog.sanity = 0;
-            }
+            dog.sanity -= 16;
+            if (dog.sanity < 0) dog.sanity = 0;
             //LONELINESS
             if (dog.ownerOut)
             {
@@ -202,11 +195,8 @@ public class InputListener : MonoBehaviour
             dog.hunger -= 3 * dog.HowMany15MinsToNewDay;
             if (dog.hunger < 0) dog.hunger = 0;
             //SANITY
-            if (!dog.dogOut)
-            {
-                dog.sanity -= 4 * dog.HowMany15MinsToNewDay;
-                if (dog.sanity < 0) dog.sanity = 0;
-            }
+            dog.sanity -= 4 * dog.HowMany15MinsToNewDay;
+            if (dog.sanity < 0) dog.sanity = 0;
             //LONELINESS
             if (dog.ownerOut)
             {
@@ -224,21 +214,30 @@ public class InputListener : MonoBehaviour
     //F
     public void LoadDish()
     {
-            if(dog.dish == 100)
-            {
-                log.AddTextToLog("Dish already full!");
-            }
-            else
-            {
-                dog.dish = 100;
-            }  
+        if (dog.dish == 100)
+        {
+            log.AddTextToLog("Dish already full!");
+        }
+        else
+        {
+            dog.dish = 100;
+        }
     }
-
 
     //T
     public void Treat()
     {
-        if(dog.hunger >= 75) {
+        if (dog.isSleeping)
+        {
+            log.AddTextToLog("Boggie is sleeping! You may not want to bother him.");
+            return;
+        }
+        if (dog.ownerOut)
+        {
+            log.AddTextToLog("You miss your dog a lot! But you at work now.");
+            return;
+        }
+        if (dog.hunger >= 75) {
             log.AddTextToLog("Boggie seems pretty full at this time...");
         }
         else if(dog.hunger >= 30) {
@@ -250,60 +249,160 @@ public class InputListener : MonoBehaviour
             dog.hunger += 10;
             log.AddTextToLog("Boggie is stearing at your hand, maybe he wants more?");
         }
-
-
     }
-
 
     //K
     public void Fetch()
     {
-        
-
-
+        if (dog.isSleeping)
+        {
+            log.AddTextToLog("Boggie is sleeping! You may not want to bother him.");
+            return;
+        }
+        if (dog.ownerOut)
+        {
+            log.AddTextToLog("You miss your dog a lot! But you at work now.");
+            return;
+        }
+        if (dog.Fetch <= 10)
+        {
+            dog.Fetch += 5;
+            dog.accompany += 15;
+            log.AddTextToLog("Boggie absolutely wants to play more!");
+        }
+        else if (dog.Fetch > 10 && dog.Fetch <= 50)
+        {
+            dog.Fetch += 10;
+            dog.accompany += 10;
+            log.AddTextToLog("Boggie feels happy playing!");
+        }
+        else if (dog.Fetch > 50)
+        {
+            dog.Fetch += 15;
+            if (dog.Fetch > 100)
+            {
+                dog.Fetch = 100;
+                dog.accompany -= 10;
+                log.AddTextToLog("Boggie does not want to fetch now.");
+            }
+            else
+            {
+                dog.accompany += 5;
+                log.AddTextToLog("Boggie is getting tired.");
+            }
+        }
     }
-
 
     //P
     public void Pet()
     {
-        
+        if (dog.isSleeping)
+        {
+            log.AddTextToLog("Boggie is sleeping! You may not want to bother him.");
+            return;
+        }
+        if (dog.ownerOut)
+        {
+            log.AddTextToLog("You miss your dog a lot! But you at work now.");
+            return;
+        }
+        dog.accompany += 5;
+        log.AddTextToLog("You are petting Boggie~");
     }
-
 
     //B
     public void BellyRub()
     {
-        
+        if (dog.isSleeping)
+        {
+            log.AddTextToLog("Boggie is sleeping! You may not want to bother him.");
+            return;
+        }
+        if (dog.ownerOut)
+        {
+            log.AddTextToLog("You miss your dog a lot! But you are at work now.");
+            return;
+        }
+        dog.dogAlone = false;
+        if (dog.Belly <= 10)
+        {
+            dog.Belly += 5;
+            dog.accompany += 15;
+            log.AddTextToLog("Boggie wants more, rub him.");
+        }
+        else if (dog.Belly > 10 && dog.Belly <= 50)
+        {
+            dog.Belly += 10;
+            dog.accompany += 10;
+            log.AddTextToLog("Boggie feels comfortable!");
+        }
+        else if (dog.Belly > 50)
+        {
+            dog.Belly += 15;
+            if (dog.Belly > 100)
+            {
+                dog.Belly = 100;
+                dog.accompany -= 10;
+                log.AddTextToLog("Boggie feels good enough.");
+            }
+            else
+            {
+                dog.accompany += 5;
+                log.AddTextToLog("Boggie does not look so happy, you may want to stop.");
+            }
+        }
     }
-
 
     //W
     public void Walk()
     {
-        
+        if (dog.isSleeping)
+        {
+            log.AddTextToLog("Boggie is sleeping! You may not want to bother him.");
+            return;
+        }
+        if (dog.ownerOut)
+        {
+            log.AddTextToLog("You miss your dog a lot! But you are at work now.");
+            return;
+        }
+        dog.dogAlone = false;
+        log.AddTextToLog("Come on, Boggie! Lets go for a walk");
+        Add1Hour();
     }
-
 
     //L
     public void LeaveAlone()
     {
-        
+        log.AddTextToLog("You leave Boggie alone.");
+        dog.dogAlone = true;
     }
-
 
     //G
     public void Work()
     {
-        
+        if (dog.ownerOut)
+        {
+            log.AddTextToLog("You forget you are working? Concentrate!");
+            return;
+        }
+        dog.ownerOut = true;
+        log.AddTextToLog("You are going to work now!");
+        dog.dogAlone = true;
+        return;
     }
 
     //A
     public void Return()
     {
-
+        if (!dog.ownerOut)
+        {
+            log.AddTextToLog("You are at home. Dont you remember anything?");
+            return;
+        }
+        log.AddTextToLog("You get back to home after work!");
+        return;
     }
-
 
     //S
     public void Noise()

@@ -16,9 +16,6 @@ tree("DayBehavior")
 			OwnerIsOut
 			tree("DayOut")
 		while
-			DogIsOut
-			tree("DayWalk")
-		while
 			IsSleeping
 			tree("DaySleep")
 

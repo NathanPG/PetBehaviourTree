@@ -17,21 +17,23 @@ public class Manager : MonoBehaviour {
     public float hunger;
     //is sleepy
     public float stamina;
-    //wants to play
+    //wants to go out
     public float sanity;
     //is not lonely 
     public float accompany;
+    //Fetch
+    public float Fetch;
+    //Belly
+    public float Belly;
     /*
     public float contentment;
     public float bladder;
     */
     public bool isSleeping;
     public bool ownerOut;
-    public bool dogOut;
     public bool timepassed;
-
-    public int Fetch_ThisHour;
-    public int Belly_ThisHour;
+    public bool dogAlone;
+    
     public int HowMany15MinsToNewDay;
 
     public float dish;
@@ -63,11 +65,6 @@ public class Manager : MonoBehaviour {
     [Task]
     bool OwnerIsOut() {
         return ownerOut;
-    }
-
-    [Task]
-    bool DogIsOut() {
-        return dogOut;
     }
 
     [Task]
@@ -132,6 +129,9 @@ public class Manager : MonoBehaviour {
         sanity = 100;
         stamina = 100;
         accompany = 100;
+        Fetch = 60;
+        Belly = 60;
+        dogAlone = true;
         //contentment = 100;
         //bladder = 0;
         HowMany15MinsToNewDay = 96;
