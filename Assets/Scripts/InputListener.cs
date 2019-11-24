@@ -7,15 +7,24 @@ public class InputListener : MonoBehaviour
 {
     public Manager dog;
     public Log log;
+    public float timer;
 
     // Start is called before the first frame update 
     void Start() {
         dog = GameObject.Find("GameController").GetComponent<Manager>();
         log = GameObject.Find("GameController").GetComponent<Log>();
+        timer = 0f;
+
     }
 
     // Update is called once per frame 
     void Update() {
+        timer += Time.deltaTime;
+        if(timer >= 15) {
+            timer = 0f;
+            Add15Mins();
+        }
+
         string inputstring = Input.inputString;
 
         // Look for a number key click 
