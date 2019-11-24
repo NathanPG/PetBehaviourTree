@@ -17,7 +17,7 @@ public class Manager : MonoBehaviour {
     public float hunger;
     //is sleepy
     public float stamina;
-    //wants to play
+    //wants to go out
     public float sanity;
     //is not lonely 
     public float accompany;
@@ -27,7 +27,6 @@ public class Manager : MonoBehaviour {
     */
     public bool isSleeping;
     public bool ownerOut;
-    public bool dogOut;
     public bool timepassed;
 
     public int Fetch_ThisHour;
@@ -65,10 +64,6 @@ public class Manager : MonoBehaviour {
         return ownerOut;
     }
 
-    [Task]
-    bool DogIsOut() {
-        return dogOut;
-    }
 
     [Task]
     bool IsSleeping() {
@@ -78,22 +73,22 @@ public class Manager : MonoBehaviour {
     [Task]
     bool IsTired()
     {
-        return stamina < 30;
+        return stamina < 40;
     }
     [Task]
     bool IsHungry()
     {
-        return hunger<30;
+        return hunger < 40;
     }
     [Task]
     bool IsLonely()
     {
-        return accompany<30;
+        return accompany < 40;
     }
     [Task]
     bool WantToPlay()
     {
-        return sanity<30;
+        return sanity < 40;
     }
     [Task]
     bool NeedToGoOut()
@@ -119,8 +114,28 @@ public class Manager : MonoBehaviour {
             dish = 0;
             log.AddTextToLog("Boggie ate all food in the dish");
         } else{
-            log.AddTextToLog("ERROR, THIS NODE SHOULD NOT BE REACHED");
+            log.AddTextToLog("Boggie looked at the empty dish and softly barked at you, looks like he's hungry...");
         }
+        return true;
+    }
+
+    [Task]
+    bool Sleep() {
+        isSleeping = true;
+        log.AddTextToLog("Boggie felt too tired an went to sleep.");
+        return true;
+    }
+
+    [Task]
+    bool LookForPet() {
+        log.AddTextToLog("Boggie is running around your feet, he must be missing you so much!");
+        log.AddTextToLog("Maybe");
+        return true;
+    }
+
+    [Task]
+    bool LookOutside() {
+        log.AddTextToLog("Boggie sits at the window and stear at the horizon, he must be willing to have a run out side.");
         return true;
     }
 

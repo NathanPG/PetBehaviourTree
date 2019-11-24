@@ -114,11 +114,6 @@ public class InputListener : MonoBehaviour
             dog.hunger -= 3;
             if (dog.hunger < 0) dog.hunger = 0;
             //SANITY
-            if (!dog.dogOut)
-            {
-                dog.sanity -= 4;
-                if (dog.sanity < 0) dog.sanity = 0;
-            }
             //LONELINESS
             if (dog.ownerOut)
             {
@@ -162,11 +157,6 @@ public class InputListener : MonoBehaviour
             dog.hunger -= 12;
             if (dog.hunger < 0) dog.hunger = 0;
             //SANITY
-            if (!dog.dogOut)
-            {
-                dog.sanity -= 16;
-                if (dog.sanity < 0) dog.sanity = 0;
-            }
             //LONELINESS
             if (dog.ownerOut)
             {
@@ -202,11 +192,6 @@ public class InputListener : MonoBehaviour
             dog.hunger -= 3 * dog.HowMany15MinsToNewDay;
             if (dog.hunger < 0) dog.hunger = 0;
             //SANITY
-            if (!dog.dogOut)
-            {
-                dog.sanity -= 4 * dog.HowMany15MinsToNewDay;
-                if (dog.sanity < 0) dog.sanity = 0;
-            }
             //LONELINESS
             if (dog.ownerOut)
             {

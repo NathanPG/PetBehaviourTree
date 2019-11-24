@@ -14,9 +14,9 @@ public class Log : MonoBehaviour
     {
         GameObject temp = Instantiate(textPre, scrollRect.content, false);
         temp.GetComponentInChildren<Text>().text = LogText;
-        //scrollRect.verticalNormalizedPosition = 0;
-        //LayoutRebuilder.MarkLayoutForRebuild(scrollRect.content);
-        //LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+        scrollRect.verticalNormalizedPosition = 0;
+        LayoutRebuilder.MarkLayoutForRebuild(scrollRect.content);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
         return true;
     }
 
