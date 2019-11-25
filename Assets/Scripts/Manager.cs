@@ -7,10 +7,15 @@ using Panda;
 public class Manager : MonoBehaviour {
 
     public Log log;
+
     public float minutes;
     public float hours;
     public Text hour_dis;
     public Text minute_dis;
+    public Text hunger_dis;
+    public Text stamina_dis;
+    public Text sanity_dis;
+    public Text trust_dis;
 
     //ALL DECREASE 100 -> 0
     //is hungry
@@ -19,8 +24,8 @@ public class Manager : MonoBehaviour {
     public float stamina;
     //wants to go out
     public float sanity;
-    //is not lonely 
-    public float accompany;
+    //trust
+    public float trust;
 
     //Fetch
     public float Fetch;
@@ -40,13 +45,6 @@ public class Manager : MonoBehaviour {
     public int HowMany15MinsToNewDay;
 
     public float dish;
-    [Task]
-    bool DEBUG()
-    {
-        Debug.Log("HUNGER: " + hunger + ", STAMINA: " + stamina 
-            + ", SANITY: " + sanity + ", LONELINESS: " + accompany);
-        return true;
-    }
     [Task]
     bool CheckTimePass() {
         if (timepassed) {
@@ -74,7 +72,6 @@ public class Manager : MonoBehaviour {
     bool IsSleeping() {
         return isSleeping;
     }
-
     [Task]
     bool IsTired()
     {
@@ -88,7 +85,7 @@ public class Manager : MonoBehaviour {
     [Task]
     bool IsLonely()
     {
-        return accompany < 40;
+        return trust < 40;
     }
     [Task]
     bool WantToPlay()
@@ -173,7 +170,6 @@ public class Manager : MonoBehaviour {
     [Task]
     bool LookForPet() {
         log.AddTextToLog("Boggie is running around your feet, he must be missing you so much!");
-        log.AddTextToLog("Maybe");
         return true;
     }
 
@@ -189,7 +185,7 @@ public class Manager : MonoBehaviour {
         hunger = 100;
         sanity = 100;
         stamina = 100;
-        accompany = 100;
+        trust = 100;
         Fetch = 0;
         Belly = 0;
         dogAlone = false;
@@ -201,8 +197,4 @@ public class Manager : MonoBehaviour {
         minute_dis.text = minutes.ToString("00");
         log = this.gameObject.GetComponent<Log>();
     }
-
-    void Update() {
-    }
-
 }

@@ -18,6 +18,10 @@ public class InputListener : MonoBehaviour
 
     // Update is called once per frame 
     void Update() {
+        dog.hunger_dis.text = "Hunger: \n" + dog.hunger.ToString("00");
+        dog.trust_dis.text = "Trust: \n" + dog.trust.ToString("00");
+        dog.stamina_dis.text = "Stanima: \n" + dog.stamina.ToString("00");
+        dog.sanity_dis.text = "Sanity: \n" + dog.sanity.ToString("00");
         timer += Time.deltaTime;
         if(timer >= 15) {
             timer = 0f;
@@ -29,7 +33,7 @@ public class InputListener : MonoBehaviour
         // Look for a number key click 
         if (inputstring.Length > 0) {
             Debug.Log(inputstring);
-
+            
             if (inputstring[0] == 'f' || inputstring[0] == 'F') {
                 LoadDish();
             }
@@ -119,13 +123,13 @@ public class InputListener : MonoBehaviour
         //LONELINESS
         if (dog.ownerOut)
         {
-            dog.accompany -= 5;
-            if (dog.accompany < 0) dog.accompany = 0;
+            dog.trust -= 5;
+            if (dog.trust < 0) dog.trust = 0;
         }
         else
         {
-            dog.accompany -= 3;
-            if (dog.accompany < 0) dog.accompany = 0;
+            dog.trust -= 3;
+            if (dog.trust < 0) dog.trust = 0;
         }
         //Fetch
         dog.Fetch -= 4;
@@ -170,13 +174,13 @@ public class InputListener : MonoBehaviour
             //LONELINESS
             if (dog.ownerOut)
             {
-                dog.accompany -= 20;
-                if (dog.accompany < 0) dog.accompany = 0;
+                dog.trust -= 20;
+                if (dog.trust < 0) dog.trust = 0;
             }
             else
             {
-                dog.accompany -= 12;
-                if (dog.accompany < 0) dog.accompany = 0;
+                dog.trust -= 12;
+                if (dog.trust < 0) dog.trust = 0;
             }
         //Fetch
         dog.Fetch -= 16;
@@ -213,13 +217,13 @@ public class InputListener : MonoBehaviour
             //LONELINESS
             if (dog.ownerOut)
             {
-                dog.accompany -= 5 * dog.HowMany15MinsToNewDay;
-                if (dog.accompany < 0) dog.accompany = 0;
+                dog.trust -= 5 * dog.HowMany15MinsToNewDay;
+                if (dog.trust < 0) dog.trust = 0;
             }
             else
             {
-                dog.accompany -= 3 * dog.HowMany15MinsToNewDay;
-                if (dog.accompany < 0) dog.accompany = 0;
+                dog.trust -= 3 * dog.HowMany15MinsToNewDay;
+                if (dog.trust < 0) dog.trust = 0;
             }
             //Fetch
         dog.Fetch -= 384;
@@ -232,6 +236,11 @@ public class InputListener : MonoBehaviour
     //F
     public void LoadDish()
     {
+        if (dog.ownerOut)
+        {
+            log.AddTextToLog("You cannt load the dish! You are at work now.");
+            return;
+        }
         if (dog.dish == 100)
         {
             log.AddTextToLog("Dish already full!");
@@ -252,7 +261,7 @@ public class InputListener : MonoBehaviour
         }
         if (dog.ownerOut)
         {
-            log.AddTextToLog("You miss your dog a lot! But you at work now.");
+            log.AddTextToLog("You cannt give the dog a treat! You are at work now.");
             return;
         }
         dog.dogAlone = false;
@@ -262,12 +271,13 @@ public class InputListener : MonoBehaviour
         else if(dog.hunger >= 30) {
             log.AddTextToLog("Boggie looks happy with the treat!");
             dog.hunger += 10;
-            dog.accompany = dog.accompany <= 50 ? dog.accompany + 10 : dog.accompany;
+            dog.trust = dog.trust <= 50 ? dog.trust + 10 : dog.trust;
         } else {
             log.AddTextToLog("Boggie rushed towards you and devoured the treat...");
             dog.hunger += 10;
             log.AddTextToLog("Boggie is stearing at your hand, maybe he wants more?");
         }
+        if(dog.hunger>100) dog.hunger = 100;
     }
 
     //K
@@ -280,20 +290,21 @@ public class InputListener : MonoBehaviour
         }
         if (dog.ownerOut)
         {
-            log.AddTextToLog("You miss your dog a lot! But you at work now.");
+            log.AddTextToLog("You cannt play fetching with Boggies! You are at work now.");
             return;
         }
         dog.dogAlone = false;
         if (dog.Fetch <= 10)
         {
             dog.Fetch += 5;
-            dog.accompany += 15;
+            dog.trust += 15;
+            
             log.AddTextToLog("Boggie absolutely wants to play more!");
         }
         else if (dog.Fetch > 10 && dog.Fetch <= 50)
         {
             dog.Fetch += 10;
-            dog.accompany += 10;
+            dog.trust += 10;
             log.AddTextToLog("Boggie feels happy playing!");
         }
         else if (dog.Fetch > 50)
@@ -302,15 +313,16 @@ public class InputListener : MonoBehaviour
             if (dog.Fetch > 100)
             {
                 dog.Fetch = 100;
-                dog.accompany -= 10;
+                dog.trust -= 10;
                 log.AddTextToLog("Boggie does not want to fetch now.");
             }
             else
             {
-                dog.accompany += 5;
+                dog.trust += 5;
                 log.AddTextToLog("Boggie is getting tired.");
             }
         }
+        if (dog.trust > 100) dog.trust = 100;
     }
 
     //P
@@ -323,12 +335,13 @@ public class InputListener : MonoBehaviour
         }
         if (dog.ownerOut)
         {
-            log.AddTextToLog("You miss your dog a lot! But you at work now.");
+            log.AddTextToLog("You cannt pet Boggie! You are at work now.");
             return;
         }
         dog.dogAlone = false;
-        dog.accompany += 5;
+        dog.trust += 5;
         log.AddTextToLog("You are petting Boggie~");
+        if(dog.trust > 100) dog.trust = 100;
     }
 
     //B
@@ -341,20 +354,20 @@ public class InputListener : MonoBehaviour
         }
         if (dog.ownerOut)
         {
-            log.AddTextToLog("You miss your dog a lot! But you are at work now.");
+            log.AddTextToLog("You cannt rub him! You are at work now.");
             return;
         }
         dog.dogAlone = false;
         if (dog.Belly <= 10)
         {
             dog.Belly += 5;
-            dog.accompany += 15;
-            log.AddTextToLog("Boggie wants more, rub him.");
+            dog.trust += 15;
+            log.AddTextToLog("Boggie wants more.");
         }
         else if (dog.Belly > 10 && dog.Belly <= 50)
         {
             dog.Belly += 10;
-            dog.accompany += 10;
+            dog.trust += 10;
             log.AddTextToLog("Boggie feels comfortable!");
         }
         else if (dog.Belly > 50)
@@ -363,15 +376,16 @@ public class InputListener : MonoBehaviour
             if (dog.Belly > 100)
             {
                 dog.Belly = 100;
-                dog.accompany -= 10;
-                log.AddTextToLog("Boggie feels good enough.");
+                dog.trust -= 10;
+                log.AddTextToLog("Boggie bites you!");
             }
             else
             {
-                dog.accompany += 5;
+                dog.trust += 5;
                 log.AddTextToLog("Boggie does not look so happy, you may want to stop.");
             }
         }
+        if (dog.trust > 100) dog.trust = 100;
     }
 
     //W
@@ -429,5 +443,62 @@ public class InputListener : MonoBehaviour
     public void Noise()
     {
 
+        if(dog.hours<18 && dog.hours > 6)
+        {
+            if (dog.isSleeping)
+            {
+                if (dog.stamina < 50)
+                {
+                    if (dog.ownerOut)
+                    {
+                        log.AddTextToLog("You are not at home, you dont know what is going on at home.");
+                    }
+                    log.AddTextToLog("Boggie heared something, but he is too tired to react.");
+                }
+                else
+                {
+                    if (dog.ownerOut)
+                    {
+                        log.AddTextToLog("You get a call from police. They said your dog caught an intruder.");
+                    }
+                    else
+                    {
+                        log.AddTextToLog("Boggie wakes up, he shouts towards where the noise comes.");
+                    }
+                    dog.isSleeping = false;
+                }
+            }
+            else
+            {
+                if (dog.ownerOut)
+                {
+                    if(dog.trust < 50)
+                    {
+                        log.AddTextToLog("You get a call from police. They said your house was robbed.");
+                    }
+                    else
+                    {
+                        log.AddTextToLog("You get a call from police. They said your dog caught an intruder.");
+                    }
+                }
+                else
+                {
+                    if (dog.trust < 50)
+                    {
+                        log.AddTextToLog("Boggie mumbles, you are not sure what happened.");
+                    }
+                    else
+                    {
+                        log.AddTextToLog("Boggie shouts and comes to you. It seems that he wants to warn you something.");
+                        log.AddTextToLog("You see some suspicious people going far.");
+                    }
+                }
+            }
+        }
+
+        else
+        {
+
+        }
     }
 }

@@ -91,7 +91,6 @@ tree("NightOut")
 
 tree("NightSleep")
 	fallback
-		fallback
 		while
 			IsLonely
 			while
